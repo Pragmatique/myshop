@@ -1,0 +1,44 @@
+{% load static %}
+{% load bootstrap3 %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>{% block title %}My shop{% endblock %}</title>
+  <link href="{% static 'css/base.cs' %}" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+</head>
+<body>
+  <div id="header">
+    <a href="/" class="logo">My shop</a>
+  </div>
+  <div id="subheader">
+    <div class="cart">
+      {% with total_items=cart|length %}
+        {% if cart|length > 0 %}
+          Your cart:
+          <a href="{% url 'cart:cart_detail' %}">
+            {{ total_items }} item {{ total_items|pluralize }},
+            uah{{ cart.get_total_price }}
+          </a>
+        {% else %}
+          Your cart is empty.
+        {% endif %}
+      {% endwith %}
+    </div>
+    <div class="auth">
+    {% if request.user.is_authenticated %}
+          <h4>Hello, {{request.user.get_full_name}}</h4>
+          <a href="{% url 'authproj:signing_out' %}">Log out</a>
+    {% else %}
+          <h4>You visit this site as an anonimous</h4>
+          <a href="{% url 'authproj:signing_in' %}">Log in</a>  <a href="{% url 'authproj:signing_up' %}">Register</a>
+    {% endif %}
+    </div>
+  </div>
+  <div id="content">
+    {% block content %}
+    {% endblock %}
+  </div>
+</body>
+</html>
