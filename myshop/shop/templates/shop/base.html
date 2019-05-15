@@ -1,38 +1,59 @@
 {% load static %}
 {% load bootstrap3 %}
+{% load i18n %}
+
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>{% block title %}My shop{% endblock %}</title>
+  <title>{% block title %}{% trans "Coffee/tea shop" %}{% endblock %}</title>
   <link href="{% static 'css/base.cs' %}" rel="stylesheet">
   <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
 </head>
 <body>
   <div id="header">
-    <a href="/" class="logo">My shop</a>
+    <a href="/" class="logo">{% trans "Coffee/tea shop" %}</a>
+    {% trans "Language" %} {% get_current_language as LANGUAGE_CODE %} {{LANGUAGE_CODE}}
+    <form action="{% url 'i18n:set_language' %}" method="POST">{% csrf_token %}
+      <input type="hidden" name="text" value="{{ redirect_to }}">
+      <select name="language" id="">
+        {% get_available_languages as LANGUAGES %}
+        {% get_language_info_list for LANGUAGES as languages%}
+        {% for language in languages%}
+          <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %} selected {% endif %}>
+            {{ language.name_local }} ({{ language.code }})
+          </option>
+        {% endfor %}
+      </select>
+      <input type="submit" value="Set language">
+
+
+    </form>
   </div>
   <div id="subheader">
     <div class="cart">
       {% with total_items=cart|length %}
         {% if cart|length > 0 %}
-          Your cart:
+          {% trans "Your cart" %}:
           <a href="{% url 'cart:cart_detail' %}">
-            {{ total_items }} item {{ total_items|pluralize }},
-            uah{{ cart.get_total_price }}
+            {{ total_items }} {% if cart|length == 1 %} {% trans "item" %}
+                                {% elif cart|length == 2 or cart|length == 3 or cart|length == 4 %} {% trans "items " %}
+                                {% else %}{% trans "items" %}
+                               {% endif %},
+            {{ cart.get_total_price }}{% trans "uah" %}
           </a>
         {% else %}
-          Your cart is empty.
+          {% trans "Your cart is empty" %}
         {% endif %}
       {% endwith %}
     </div>
     <div class="auth">
     {% if request.user.is_authenticated %}
-          <h4>Hello, {{request.user.get_full_name}}</h4>
-          <a href="{% url 'authproj:signing_out' %}">Log out</a>
+          <h4>{% trans "Hello" %}, {{request.user.get_full_name}}</h4>
+          <a href="{% url 'authproj:signing_out' %}">{% trans "Log out" %}</a>
     {% else %}
-          <h4>You visit this site as an anonimous</h4>
-          <a href="{% url 'authproj:signing_in' %}">Log in</a>  <a href="{% url 'authproj:signing_up' %}">Register</a>
+          <h4>{% trans "You visit this site as an anonimous" %}</h4>
+          <a href="{% url 'authproj:signing_in' %}">{% trans "Log in" %}</a>  <a href="{% url 'authproj:signing_up' %}">{% trans "Register" %}</a>
     {% endif %}
     </div>
   </div>

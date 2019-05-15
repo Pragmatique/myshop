@@ -18,16 +18,20 @@ from django.urls import path,re_path
 from django.conf.urls import include, url
 from django.conf import settings
 from django.conf.urls.static import static
+from django.conf.urls.i18n import i18n_patterns
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('i18n/', include(('django.conf.urls.i18n','i18n'), namespace='i18n')),
+    ]
+urlpatterns+=i18n_patterns(
     url(r'^cart/', include(('cart.urls','cart'), namespace='cart')),
     url(r'^orders/', include(('orders.urls','orders'), namespace='orders')),
     url(r'^auth/', include(('authproj.urls','authproj'), namespace='authproj')),
     url(r'^', include(('shop.urls','shop'), namespace='shop')),
-
-]
+    prefix_default_language=True,
+)
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,

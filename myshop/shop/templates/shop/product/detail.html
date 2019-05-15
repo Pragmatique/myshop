@@ -1,20 +1,21 @@
 {% extends "shop/base.html" %}
+{% load i18n %}
 {% load static %}
 
 {% block title %}
-  {% if category %}{{ category.title }}{% else %}Products{% endif %}
+  {% if category %}{{ category.name }}{% else %}{{ product.name }}{% endif %}
 {% endblock %}
 
 {% block content %}
   <div class="product-detail">
     <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}"  width="280" height="200">
     <h1>{{ product.name }}</h1>
-    <h2><a href="{{ product.category.get_absolute_url }}">{{ product.category }}</a></h2>
-    <p class="price">uah{{ product.price }}</p>
+    <h2><a href="{{ product.category.get_absolute_url }}">{% trans product.category.name %}</a></h2>
+    <p class="price">{{ product.price }}{% trans "uah" %}</p>
     <form action="{% url 'cart:cart_add' product.id %}" method="post">
       {{ cart_product_form }}
       {% csrf_token %}
-      <input type="submit" value="Add to cart">
+      <input type="submit" value="{% trans 'Add to cart' %}">
     </form>
     {{ product.description|linebreaks }}
   </div>
