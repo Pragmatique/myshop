@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-09 00:50+0300\n"
+"POT-Creation-Date: 2019-05-18 20:37+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,68 +20,191 @@ msgstr ""
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
 "%100>=11 && n%100<=14)? 2 : 3);\n"
 
+#: .\cart\forms.py:10 .\cart\templates\cart\detail.html:16
+msgid "Quantity"
+msgstr "Количество"
+
+#: .\cart\templates\cart\detail.html:14
+msgid "Image"
+msgstr "Изображение"
+
+#: .\cart\templates\cart\detail.html:15
+msgid "Product"
+msgstr "Товар"
+
+#: .\cart\templates\cart\detail.html:17
+msgid "Remove"
+msgstr "Удалить"
+
+#: .\cart\templates\cart\detail.html:18
+msgid "Unit price"
+msgstr "Цена товара"
+
+#: .\cart\templates\cart\detail.html:19
+msgid "Price"
+msgstr "Стоимость"
+
+#: .\shop\templates\shop\base.html:9 .\shop\templates\shop\base.html:15
+msgid "Coffee/tea shop"
+msgstr "Кофе/чай магазин"
+
 #: .\shop\templates\shop\base.html:16
 msgid "Language"
 msgstr "Язык"
-msgid "Coffee"
-msgstr "Кофе"
-msgid "Tea"
-msgstr "Чай"
-msgid "Coffee/tea shop"
-msgstr "Кофе/чай магазин"
-msgid "Products"
-msgstr "Продукты"
-msgid "item"
-msgstr "продукт"
-msgid "items "
-msgstr "продукта"
-msgid "items"
-msgstr "продуков"
-msgid "uah"
-msgstr "грн"
-msgid "Your cart is empty"
-msgstr "Ваша корзина пуста"
-msgid "Log out"
-msgstr "Выйти"
-msgid "You visit this site as an anonimous"
-msgstr "Вы зашли как анонимный пользователь"
-msgid "Log in"
-msgstr "Войти"
-msgid "Register"
-msgstr "Зарегистрироваться"
-msgid "Hello"
-msgstr "Здравствуйте"
-msgid "Arabica coffee"
-msgstr "Кофе арабика"
-msgid "Robusta coffee"
-msgstr "Кофе рабуста"
-msgid "Green tea"
-msgstr "Зеленый чай"
-msgid "Mate tea"
-msgstr "Чай мате"
-msgid "Powder tea"
-msgstr "Чайный порох"
-msgid "Puer"
-msgstr "Пуэр"
-msgid "Categories"
-msgstr "Категории"
-msgid "All:"
-msgstr "Все:"
-msgid "Products:"
-msgstr "Товары:"
-msgid "Quantity"
-msgstr "Количество"
-msgid "Add to cart"
-msgstr "Добавить в корзину"
+
+#: .\shop\templates\shop\base.html:37
 msgid "Your cart"
 msgstr "Ваша корзина"
-msgid "Image"
-msgstr "Изображение"
-msgid "Product"
-msgstr "Товар"
-msgid "Remove"
-msgstr "Удалить"
-msgid "Unit price"
-msgstr "Цена товара"
-msgid "Price"
-msgstr "Стоимость"
+
+#: .\shop\templates\shop\base.html:39
+msgid "item"
+msgstr "продукт"
+
+#: .\shop\templates\shop\base.html:40
+msgid "items "
+msgstr "продукта"
+
+#: .\shop\templates\shop\base.html:41
+msgid "items"
+msgstr "продуков"
+
+#: .\shop\templates\shop\base.html:43
+#: .\shop\templates\shop\product\detail.html:14
+#: .\shop\templates\shop\product\list.html:31
+msgid "uah"
+msgstr "грн"
+
+#: .\shop\templates\shop\base.html:46
+msgid "Your cart is empty"
+msgstr "Ваша корзина пуста"
+
+#: .\shop\templates\shop\base.html:52
+msgid "Hello"
+msgstr "Здравствуйте"
+
+#: .\shop\templates\shop\base.html:53
+msgid "Log out"
+msgstr "Выйти"
+
+#: .\shop\templates\shop\base.html:55
+msgid "You visit this site as an anonimous"
+msgstr "Вы зашли как анонимный пользователь"
+
+#: .\shop\templates\shop\base.html:56
+msgid "Log in"
+msgstr "Войти"
+
+#: .\shop\templates\shop\base.html:56
+msgid "Register"
+msgstr "Зарегистрироваться"
+
+#: .\shop\templates\shop\product\detail.html:18
+msgid "Add to cart"
+msgstr "Добавить в корзину"
+
+#: .\shop\templates\shop\product\list.html:6
+#: .\shop\templates\shop\product\list.html:24
+msgid "Products"
+msgstr "Продукты"
+
+#: .\shop\templates\shop\product\list.html:11
+msgid "Categories"
+msgstr "Категории"
+
+#: .\shop\templates\shop\product\list.html:14
+msgid "All:"
+msgstr "Все:"
+
+msgid "Coffee"
+msgstr "Кофе"
+
+msgid "Tea"
+msgstr "Чай"
+
+msgid "Arabica coffee"
+msgstr "Кофе арабика"
+
+msgid "Robusta coffee"
+msgstr "Кофе рабуста"
+
+msgid "Green tea"
+msgstr "Зеленый чай"
+
+msgid "Mate tea"
+msgstr "Чай мате"
+
+msgid "Powder tea"
+msgstr "Чайный порох"
+
+msgid "Puer"
+msgstr "Пуэр"
+
+msgid "Products:"
+msgstr "Товары:"
+
+msgid "Update"
+msgstr "Обновить"
+
+msgid "Total"
+msgstr "Итого"
+
+msgid "Continue shopping"
+msgstr "Продолжить покупки"
+
+msgid "Create order"
+msgstr "Оформить заказ"
+
+msgid "Your order"
+msgstr "Ваш заказ"
+
+msgid "Your shopping cart"
+msgstr "Ваша корзина покупок"
+
+msgid "Place order"
+msgstr "Заказать"
+
+msgid "first_name"
+msgstr "имя"
+
+msgid "last_name"
+msgstr "фамилия"
+
+msgid "phone"
+msgstr "телефон"
+
+msgid "email"
+msgstr "почта"
+
+msgid "address"
+msgstr "адрес"
+
+msgid "city"
+msgstr "город"
+
+msgid "YourEmail@domain.com"
+msgstr "ВашМейл@domain.com"
+
+msgid "Thank you"
+msgstr "Спасибо!"
+
+msgid "Your order has been successfully completed. Your order number is"
+msgstr "Ваш заказ успешно создан. Номер Вашего заказа"
+
+msgid "Login page"
+msgstr "Страница авторизации"
+
+msgid "User info"
+msgstr "Данные пользователя"
+
+msgid "username"
+msgstr "пользватель"
+
+msgid "password"
+msgstr "пароль"
+
+msgid "Password"
+msgstr "Пароль"
+
+msgid "Registration"
+msgstr "Регистрация"
+

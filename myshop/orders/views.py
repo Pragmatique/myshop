@@ -12,7 +12,7 @@ def order_create(request):
     cart = Cart(request)
     if request.method == 'POST' or request.user.is_authenticated==False:
         form = OrderCreateForm(request.POST)
-        if form.is_valid():
+        if form.is_valid() and cart.__len__()>0:
             order = form.save()
             if request.user.is_authenticated:
                 order.userid=request.user.id
@@ -31,7 +31,8 @@ def order_create(request):
             order_created.delay(order.id)
             return render(request,
                           'orders/order/created.html',
-                          {'order': order})
+                          {'orderid': order.id})
+
     else:
         form = OrderCreateForm( initial=
                                 {  'first_name':request.user.first_name,
@@ -48,6 +49,8 @@ def order_create(request):
         # form.fields['email'] = User.objects.get(user=request.user).email
         # form.fields['address'] = User.objects.get(user=request.user).address
         # form.fields['city'] = User.objects.get(user=request.user).city
+
+
 
     return render(request,
                   'orders/order/create.html',

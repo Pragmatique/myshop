@@ -1,19 +1,20 @@
 {% extends "shop/base.html" %}
 {% load bootstrap3 %}
 {% load static %}
+{% load i18n %}
 
 {% block title %}
-  Registration
+  {% trans 'Registration' %}
 {% endblock %}
 
 {% block content %}
-  <h1>Registration</h1>
+  <h1>{% trans 'Registration' %}</h1>
 
     <form method="POST" enctype="multipart/form-data">
             {%csrf_token%}
-            <h3>User info</h3>
+            <h3>{% trans 'User info' %}</h3>
             {%bootstrap_form user_form %}
-        <button type="submit" class="btn btn-red pull-right">Registrate</button>
+        <button type="submit" class="btn btn-red pull-right">{% trans 'Register' %}</button>
 
 
     </form>
