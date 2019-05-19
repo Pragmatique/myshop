@@ -14,7 +14,17 @@
   <div id="header">
     <a href="/" class="logo">{% trans "Coffee/tea shop" %}</a>
     {% trans "Language" %} {% get_current_language as LANGUAGE_CODE %} {{LANGUAGE_CODE}}
-    <form action="{% url 'i18n:set_language' %}" method="POST">{% csrf_token %}
+    {% get_current_language as LANGUAGE_CODE %}
+    {% get_available_languages as LANGUAGES %}
+    {% get_language_info_list for LANGUAGES as languages %}
+    {% for language in languages %}
+            <a href="/{{ language.code }}{{ request.get_full_path|slice:'3:' }}"
+               class="{% if language.code == LANGUAGE_CODE %}selected{% endif %}"
+               lang="{{ language.code }}">
+                {{ language.name_local }}
+            </a>
+    {% endfor %}
+    <!--<form action="{% url 'i18n:set_language' %}" method="POST">{% csrf_token %}
       <input type="hidden" name="text" value="{{ redirect_to }}">
       <select name="language" id="">
         {% get_available_languages as LANGUAGES %}
@@ -25,7 +35,7 @@
           </option>
         {% endfor %}
       </select>
-      <input type="submit" value="Set language">
+      <input type="submit" value="Set language">-->
 
 
     </form>
