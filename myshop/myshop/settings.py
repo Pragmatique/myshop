@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'cart',
     'orders',
     'authproj',
-    'payment.apps.PaymentConfig',
+    'paypal.standard.ipn',
+    'payment',
 ]
 
 MIDDLEWARE = [
@@ -169,16 +170,19 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 #     'JWT_EXPIRATION_DELTA': datetime.timedelta(days=1/24)
 # }
 
-BRAINTREE_MERCHANT_ID = 'z3tjx3yzjqyq2yf2' # Merchant ID
-BRAINTREE_PUBLIC_KEY = 'zfk2jdmn87bqgddx' # Public Key
-BRAINTREE_PRIVATE_KEY = '475505438af3bfa3652908f323017a23' # Private key
+# BRAINTREE_MERCHANT_ID = 'z3tjx3yzjqyq2yf2' # Merchant ID
+# BRAINTREE_PUBLIC_KEY = 'zfk2jdmn87bqgddx' # Public Key
+# BRAINTREE_PRIVATE_KEY = '475505438af3bfa3652908f323017a23' # Private key
 
-from braintree import Configuration, Environment
-Configuration.configure(
-Environment.Sandbox,
-BRAINTREE_MERCHANT_ID,
-BRAINTREE_PUBLIC_KEY,
-BRAINTREE_PRIVATE_KEY
-)
+# from braintree import Configuration, Environment
+# Configuration.configure(
+# Environment.Sandbox,
+# BRAINTREE_MERCHANT_ID,
+# BRAINTREE_PUBLIC_KEY,
+# BRAINTREE_PRIVATE_KEY
+# )
 
 
+PAYPAL_RECEIVER_EMAIL = 'Silchevihor-facilitator@gmail.com'
+
+PAYPAL_TEST = True

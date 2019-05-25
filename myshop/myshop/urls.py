@@ -24,11 +24,14 @@ from django.conf.urls.i18n import i18n_patterns
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('i18n/', include(('django.conf.urls.i18n','i18n'), namespace='i18n')),
+
     ]
 urlpatterns+=i18n_patterns(
     url(r'^cart/', include(('cart.urls','cart'), namespace='cart')),
     url(r'^orders/', include(('orders.urls','orders'), namespace='orders')),
     url(r'^auth/', include(('authproj.urls','authproj'), namespace='authproj')),
+    url(r'^paypal/', include(('paypal.standard.ipn.urls','paypal.standard.ipn'), namespace='paypal.standard.ipn')),
+    url(r'^payment/', include(('payment.urls','payment'), namespace='payment')),
     url(r'^', include(('shop.urls','shop'), namespace='shop')),
     prefix_default_language=True,
 )
