@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'authproj',
     'paypal.standard.ipn',
     'payment',
+    'parler',
 ]
 
 MIDDLEWARE = [
@@ -186,3 +187,14 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 PAYPAL_RECEIVER_EMAIL = 'Silchevihor-facilitator@gmail.com'
 
 PAYPAL_TEST = True
+
+PARLER_LANGUAGES = {
+    None: (
+            {'code': 'en'},
+            {'code': 'ru'},
+        ),
+        'default': {
+        'fallback': 'en',
+        'hide_untranslated': False,
+        }
+}

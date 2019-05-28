@@ -1,12 +1,19 @@
 from django.contrib import admin
+from parler.admin import TranslatableAdmin
 
 # Register your models here.
 
 from .models import Category, Product
 
-class CategoryAdmin(admin.ModelAdmin):
+class CategoryAdmin(TranslatableAdmin):
     list_display = ['name', 'slug']
-    prepopulated_fields = {'slug': ('name',)}
+    #prepopulated_fields = {'slug': ('name',)}
+    search_fields = ['name', 'slug']
+
+    def get_prepopulated_fields(self, request, obj=None):
+        return {'slug': ('name',)}
+
+
 admin.site.register(Category, CategoryAdmin)
 
 class ProductAdmin(admin.ModelAdmin):
