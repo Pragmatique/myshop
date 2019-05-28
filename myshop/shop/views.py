@@ -28,9 +28,14 @@ def product_list(request, category_slug=None):
         product.description = _(product.description)
 
     if category_slug:
-        # category = get_object_or_404(Category, slug=category_slug)
-        category = get_object_or_404(categories, slug=category_slug)
-        category.name=_(category.name)
+        category = get_object_or_404(Category, slug=category_slug)
+        language = request.LANGUAGE_CODE
+        # code for translated slug
+        # category = get_object_or_404(Category,
+        #                              translations__language_code=language
+        #                              ,translations__slug=category_slug
+        #                              )
+        #category.name=_(category.name)
 
         products = products.filter(category=category)
         for product in products:
