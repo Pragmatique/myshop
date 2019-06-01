@@ -14,7 +14,10 @@ def cart_add(request, product_id):
     cart = Cart(request)
     product = get_object_or_404(Product, id=product_id)
     #product.name=_(product.name)
-    form = CartAddProductForm(request.POST)
+    print(request.session)
+    #max_stock=request.session.products.get(id=product_id)['stock']
+    max_stock=None
+    form = CartAddProductForm(request.POST,max_stock)
     if form.is_valid():
         cd = form.cleaned_data
         cart.add(product=product,

@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.shortcuts import render, get_object_or_404
+from django.template import RequestContext
 from django.utils import translation
 from django.utils.translation import gettext_lazy as _
 
@@ -62,7 +63,15 @@ def product_detail(request, id, slug):
     product.name = _(product.name)
     product.description = _(product.description)
 
-    cart_product_form = CartAddProductForm()
+    #print(request.session.keys())
+
+
+    max_stock = Product.objects.get(id=id).stock
+    print(max_stock)
+    #max_stock=None
+    #cart_product_form = CartAddProductForm(request,max_stock)
+    #cart_product_form = CartAddProductForm(request.POST)
+    cart_product_form = CartAddProductForm(max_stock)
     return render(request,
                   'shop/product/detail.html',
                   {'product': product,
