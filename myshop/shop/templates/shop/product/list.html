@@ -32,4 +32,6 @@
       </div>
     {% endfor %}
   </div>
+  <div>{% for product in availible_products %} {{product.stock}} {% endfor %}</div>
+
 {% endblock %}

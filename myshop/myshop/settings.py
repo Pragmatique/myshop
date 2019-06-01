@@ -78,6 +78,7 @@ TEMPLATES = [
                 'django.template.context_processors.media',
                 'django.template.context_processors.static',
                 'cart.context_processors.cart',
+                'shop.context_processors.products',
             ],
         },
     },
