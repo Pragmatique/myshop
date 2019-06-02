@@ -67,11 +67,11 @@ def product_detail(request, id, slug):
 
 
     max_stock = Product.objects.get(id=id).stock
-    print(max_stock)
+    #print(max_stock)
     #max_stock=None
     #cart_product_form = CartAddProductForm(request,max_stock)
     #cart_product_form = CartAddProductForm(request.POST)
-    cart_product_form = CartAddProductForm(max_stock)
+    cart_product_form = CartAddProductForm(max_stock=max_stock)
     return render(request,
                   'shop/product/detail.html',
                   {'product': product,

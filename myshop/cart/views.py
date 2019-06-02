@@ -14,10 +14,10 @@ def cart_add(request, product_id):
     cart = Cart(request)
     product = get_object_or_404(Product, id=product_id)
     #product.name=_(product.name)
-    print(request.session)
-    #max_stock=request.session.products.get(id=product_id)['stock']
-    max_stock=None
-    form = CartAddProductForm(request.POST,max_stock)
+    #print(request.session)
+    max_stock = Product.objects.get(id=product_id).stock
+    form = CartAddProductForm(max_stock=max_stock,data=request.POST)
+    print(request.POST)
     if form.is_valid():
         cd = form.cleaned_data
         cart.add(product=product,
@@ -38,9 +38,10 @@ def cart_detail(request):
     for item in cart:
         #print(_(item['product'].name))
         #item['product'].name=_(item['product'].name)
+        max_stock = Product.objects.get(id=item['product'].id).stock
         item['update_quantity_form'] = CartAddProductForm(
             initial={'quantity': item['quantity'],
-                     'update': True})
+                     'update': True}, max_stock=max_stock)
         #print(item['product'].name)
 
 
