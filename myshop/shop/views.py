@@ -11,6 +11,9 @@ from cart.forms import CartAddProductForm
 # Create your views here.
 def product_list(request, category_slug=None):
 
+    #user_language = request.LANGUAGE_CODE
+    #translation.activate(user_language)
+
     # user_language='en'
     # translation.activate(user_language)
     # request.session[translation.LANGUAGE_SESSION_KEY]=user_language
@@ -30,7 +33,7 @@ def product_list(request, category_slug=None):
 
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
-        language = request.LANGUAGE_CODE
+        #language = request.LANGUAGE_CODE
         # code for translated slug
         # category = get_object_or_404(Category,
         #                              translations__language_code=language
