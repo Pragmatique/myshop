@@ -1,6 +1,13 @@
 from celery import task
 from django.core.mail import send_mail
-from .models import Order
+
+from .models import Order, OrderItem
+from shop.models import Product
+
+
+from django.utils import timezone
+from datetime import datetime, timedelta
+from django.db.models import Q
 
 @task
 def order_created(order_id):
@@ -20,4 +27,26 @@ def order_created(order_id):
                           [order.email])
 
 
+
+
     return mail_sent
+
+
+@task
+def regular_delete_unconfirmed_preorders():
+
+    print("Begin deleting")
+    #updated > datetime.now() - timedelta(hours=5)
+    time_threshold = datetime.now() - timedelta(minutes=5)
+    unconfirmed_orders = Order.objects.filter(Q(updated__lt=time_threshold)&Q(status='NEW'))
+    for order in unconfirmed_orders:
+        order.status='EXPIRED'
+        order.save()
+        order_items=OrderItem.objects.filter(order=order)
+        for order_item in order_items:
+            product = order_item.product
+            product.stock+=order_item.quantity
+            product.save()
+            order_item.quantity=0
+            order_item.save()
+

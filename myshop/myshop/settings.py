@@ -54,6 +54,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django_session_timeout.middleware.SessionTimeoutMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -61,6 +62,10 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+SESSION_EXPIRE_SECONDS = 5*60 #5 minutes
+
 
 ROOT_URLCONF = 'myshop.urls'
 
@@ -199,3 +204,6 @@ PARLER_LANGUAGES = {
         'hide_untranslated': False,
         }
 }
+
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
+

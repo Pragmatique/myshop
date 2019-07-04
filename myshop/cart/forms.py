@@ -11,9 +11,9 @@ class CartAddProductForm(forms.Form):
 
 
         if max_stock:
-            print(max_stock)
+            # print(max_stock)
             self.max_stock = max_stock
-            print(self.max_stock)
+            # print(self.max_stock)
             #print(*args)
             self.fields['quantity'] = forms.TypedChoiceField(
                                          #choices=PRODUCT_QUANTITY_CHOICES,
