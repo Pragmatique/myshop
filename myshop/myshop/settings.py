@@ -51,20 +51,29 @@ INSTALLED_APPS = [
     'parler',
 ]
 
-MIDDLEWARE = [
+# MIDDLEWARE was changed to MIDDLEWARE_CLASSES for old stylish due to dump errors
+MIDDLEWARE  = [
     'django.middleware.security.SecurityMiddleware',
+    #'myshop.middleware.AutoLogout',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django_session_timeout.middleware.SessionTimeoutMiddleware',
+
+    #'django_session_timeout.middleware.SessionTimeoutMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'myshop.middleware.AutoLogout',
 ]
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
-SESSION_EXPIRE_SECONDS = 5*60 #5 minutes
+#SESSION_EXPIRE_SECONDS = 1*60 #1 minutes
+SESSION_EXPIRE_AFTER_LAST_ACTIVITY = True
+SESSION_EXPIRE_AFTER_LAST_ACTIVITY_GRACE_PERIOD = 1*60
+
+AUTO_LOGOUT_DELAY=1
 
 
 ROOT_URLCONF = 'myshop.urls'
