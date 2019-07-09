@@ -26,12 +26,12 @@ class AutoLogout(MiddlewareMixin):
 
         if request.user.is_authenticated:
 
-            print(request.user.id)
+            # print(request.user.id)
             init_time = User.objects.get(id=request.user.id).last_login
-            #init_time = request.session.setdefault('SESSION_TIMEOUT_KEY', time.time())
-            print(User.objects.get(id=request.user.id).last_login)
-            print(datetime.now(timezone.utc))
-            print((datetime.now(timezone.utc) - init_time).total_seconds())
+            # #init_time = request.session.setdefault('SESSION_TIMEOUT_KEY', time.time())
+            # print(User.objects.get(id=request.user.id).last_login)
+            # print(datetime.now(timezone.utc))
+            # print((datetime.now(timezone.utc) - init_time).total_seconds())
 
             expire_seconds = getattr(
                 settings, "SESSION_EXPIRE_SECONDS", settings.SESSION_COOKIE_AGE

@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from datetime import datetime, timedelta, timezone
 from django.shortcuts import render, get_object_or_404
 from django.template import RequestContext
 from django.utils import translation
@@ -10,6 +11,8 @@ from cart.forms import CartAddProductForm
 
 # Create your views here.
 def product_list(request, category_slug=None):
+
+    #print(datetime.now(timezone.utc) - timedelta(minutes=5))
 
     #user_language = request.LANGUAGE_CODE
     #translation.activate(user_language)
