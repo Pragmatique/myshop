@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from decimal import Decimal
 from django.db.models import Q
+from datetime import datetime, timedelta, timezone
 
 from .models import OrderItem, Order
 from .forms import OrderCreateForm
@@ -30,7 +31,7 @@ def order_create(request):
                                             quantity=item['quantity']
                                              )
                 # clear the cart
-                cart.clear()
+                #cart.clear()
                 # launch asynchronous task
                 #print("Task completed")
                 order_created.delay(order.id)
@@ -67,7 +68,7 @@ def order_create(request):
                                )
         if form.is_valid():
             form.save()
-            cart.clear()
+            #cart.clear()
             return redirect(reverse('payment:process'))
 
 
@@ -79,6 +80,7 @@ def order_create(request):
 
 
 def order_from_cart(request):
+
     cart = Cart(request)
 
     if request.user.is_authenticated:
@@ -155,6 +157,7 @@ def del_from_preorder(request,product):
     if 'order_id' in request.session:
         cart = Cart(request)
         order = Order.objects.get(id=request.session['order_id'])
+
         product = product
         ordered_item = OrderItem.objects.get(Q(order=order) & Q(product=product))
         quantity=int(ordered_item.quantity)

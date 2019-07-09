@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from paypal.standard.forms import PayPalPaymentsForm
 from orders.models import Order
 from django.views.decorators.csrf import csrf_exempt
+from cart.cart import Cart
 
 # Create your views here.
 @csrf_exempt
@@ -60,6 +61,16 @@ def payment_process(request):
 
 @csrf_exempt
 def payment_done(request):
+    cart = Cart(request)
+    cart.clear()
+    order_id = request.session.get('order_id')
+    order = get_object_or_404(Order, id=order_id)
+    order.status = 'CONFIRMED'
+    order.paid = True
+    order.save()
+
+    del request.session['order_id']
+
     return render(request, 'payment/done.html')
 
 @csrf_exempt
