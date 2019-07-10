@@ -25,11 +25,25 @@ def order_create(request):
                     order.save()
 
                 for item in cart:
+                    if int(item['quantity']) > int(item['product'].stock):
+                        cart.add(product=item['product'],
+                                 quantity=int(item['product'].stock),
+                                 update_quantity=True,
+                                 request=request)
+
+
                     OrderItem.objects.create(order=order,
                                             product=item['product'],
                                             price=item['price'],
                                             quantity=item['quantity']
                                              )
+
+                    product = Product.objects.get(id=item['product'].id)
+                    setattr(product,
+                            'stock',
+                            int(product.stock) - int(item['quantity'])
+                            )
+                    product.save()
                 # clear the cart
                 #cart.clear()
                 # launch asynchronous task
@@ -55,6 +69,19 @@ def order_create(request):
                                    )
     else:
         order = Order.objects.get(id=request.session['order_id'])
+        ordered_items = order.items.all()
+        for oritem in ordered_items:
+            if int(oritem.quantity) > int(oritem.product.stock):
+                cart.add(product=oritem.product,
+                         quantity=oritem.product.stock,
+                         update_quantity=True,
+                         request=request)
+                oritem.quantity=oritem.product.stock
+                oritem.save()
+                oritem.product.stock=0
+                oritem.product.save()
+                print(oritem.product)
+
         form = OrderCreateForm(request.POST or None,
                                instance=order,
                                initial=
@@ -68,6 +95,7 @@ def order_create(request):
                                )
         if form.is_valid():
             form.save()
+            order_created.delay(order.id)
             #cart.clear()
             return redirect(reverse('payment:process'))
 
